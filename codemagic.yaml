@@ -4,16 +4,11 @@ workflows:
     max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
-      android_sdk:
-        - build-tools/33.0.2
       java: 17
     scripts:
-      - name: Set Android SDK
-        script: |
-          echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
       - name: Build Android APK
         script: |
           chmod +x gradlew || true
-          ./gradlew assembleDebug || echo "No gradle wrapper found"
+          ./gradlew assembleDebug
     artifacts:
       - app/build/outputs/**/*.apk
